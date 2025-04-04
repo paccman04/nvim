@@ -11,7 +11,7 @@ keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
-keymap("n", "<leader>q", ":bd<CR>", opts)
+keymap("n", "<leader>q", ":Bdelete<CR>", opts)
 
 -- Diagnostics
 keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
@@ -34,3 +34,9 @@ keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 
 -- Windows shortcuts
 keymap("n", "<C-a>", "ggVG", opts)
+
+-- Neovide settings
+if vim.g.neovide then
+  vim.api.nvim_set_keymap('n', '<F11>', ':let g:neovide_fullscreen = !g:neovide_fullscreen<CR>', {})
+end
+

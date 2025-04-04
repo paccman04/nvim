@@ -42,10 +42,6 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
-if vim.g.neovide then
-  vim.api.nvim_set_keymap('n', '<F11>', ':let g:neovide_fullscreen = !g:neovide_fullscreen<CR>', {})
-end
-
 -- vim.opt.shortmess = "ilmnrx"                        -- flags to shorten vim messages, see :help 'shortmess'
 vim.opt.shortmess:append "c"                          -- don't give |ins-completion-menu| messages
 vim.opt.iskeyword:append "-"                          -- hyphenated words recognized by searches
