@@ -81,6 +81,7 @@ masonconfig.setup({
     "r_language_server",               -- R
     "rust_analyzer",                   -- Rust
     "sqls",                            -- SQL
+    "ts_ls",                           -- TypeScript
     "lemminx",                         -- XML
   },
   handlers = {
@@ -169,13 +170,13 @@ cmp.setup({
   },
   mapping = cmp.mapping.preset.insert({
     -- Ctrl + space triggers completion menu
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ['<C-s>'] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 
     -- Enter to accept
     ["<CR>"] = cmp.mapping.confirm { select = true },
 
-    -- Supertab setup
-    ["<Tab>"] = cmp.mapping(function(fallback)
+    -- Ctrl n and p to navigate completion menu
+    ["<C-n>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expandable() then
@@ -191,7 +192,7 @@ cmp.setup({
       "i",
       "s",
     }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
+    ["<C-p>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
