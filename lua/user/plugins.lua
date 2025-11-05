@@ -72,6 +72,8 @@ return packer.startup(function(use)
     "saadparwaiz1/cmp_luasnip",
     "rafamadriz/friendly-snippets",
     "windwp/nvim-autopairs",
+    "nvimtools/none-ls.nvim",
+    "jay-babu/mason-null-ls.nvim",
   }
   require "user.plugin-config.lsp-cmp"
 

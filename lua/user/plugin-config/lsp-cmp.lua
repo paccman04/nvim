@@ -105,6 +105,28 @@ masonconfig.setup({
   },
 })
 
+local mason_null_ls_ok, mason_null_ls = pcall(require, "mason-null-ls")
+if not mason_null_ls_ok then
+  vim.notify("require(\"mason-null-ls\") failed.")
+  return
+end
+
+mason_null_ls.setup({
+  ensure_installed = { "black" }
+})
+
+local null_ls_ok, null_ls = pcall(require, "null-ls")
+if not null_ls_ok then
+  vim.notify("require(\"null-ls\") failed.")
+  return
+end
+
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.black,
+  },
+})
+
 local cmp_ok, cmp = pcall(require, "cmp")
 if not cmp_ok then
   vim.notify("require(\"cmp\") failed.")
