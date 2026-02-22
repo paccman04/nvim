@@ -76,6 +76,7 @@ masonconfig.setup({
     "lua_ls",                          -- Lua
     "marksman",                        -- Markdown
     "matlab_ls",                       -- Matlab
+    "spyglassmc_language_server",      -- MCFunction
     "powershell_es",                   -- Powershell
     "pyright",                         -- Python
     "r_language_server",               -- R
