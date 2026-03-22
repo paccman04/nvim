@@ -1,3 +1,9 @@
+vim.filetype.add({
+  extension = {
+    mcfunction = 'mcfunction',
+  },
+})
+
 local autopairs_ok, autopairs = pcall(require, "nvim-autopairs")
 if not autopairs_ok then
   vim.notify("require(\"nvim-autopairs\") failed.")
@@ -25,6 +31,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
+vim.api.nvim_create_autocmd('LspAttach', {
+  desc = 'LSP semantic tokens',
+  callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+    if client.server_capabilities.semanticTokensProvider then
+      vim.lsp.semantic_tokens.start(event.buf, client.id)
+      vim.lsp.semantic_tokens.force_refresh(event.buf)
+    end
+  end
+})
+
 local cmplsp_ok, cmplsp = pcall(require, "cmp_nvim_lsp")
 if not cmplsp_ok then
   vim.notify("require(\"cmp_nvim_lsp\") failed.")
@@ -32,6 +50,28 @@ if not cmplsp_ok then
 end
 
 local lsp_capabilities = cmplsp.default_capabilities()
+
+lsp_capabilities.textDocument.semanticTokens = {
+  requests = {
+    range = true,
+    full = true,
+  },
+  tokenTypes = {},
+  tokenModifiers = {},
+  formats = { "relative" },
+}
+
+local links = {
+  ["@lsp.type.keyword"] = "Keyword",
+  ["@lsp.type.function"] = "Function",
+  ["@lsp.type.parameter"] = "Identifier",
+  ["@lsp.type.property"] = "Identifier",
+  ["@lsp.type.variable"] = "Identifier",
+}
+
+for new, old in pairs(links) do
+  vim.api.nvim_set_hl(0, new, { link = old })
+end
 
 local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_ok then
