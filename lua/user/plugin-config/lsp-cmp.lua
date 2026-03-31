@@ -111,7 +111,7 @@ masonconfig.setup({
     "eslint",                          -- ESLint
     "html",                            -- HTML
     "biome",                           -- JavaScript, TypeScript, and JSON
-    "java_language_server",            -- Java
+    "jdtls",                           -- Java
     "ltex",                            -- LaTeX
     "lua_ls",                          -- Lua
     "marksman",                        -- Markdown
